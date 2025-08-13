@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Все заметки{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4 text-center text-primary">Все заметки</h1>
+
+    {% if notes %}
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for note in notes %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0">
+                        {% if note.image %}
+                            <img src="{% static note.image %}" class="card-img-top" style="width: 400px" alt="{{ note.title }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ note.title }}</h5>
+                            <p class="card-text text-muted">{{ note.preview }}</p>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a href="{% url 'notes:note_detail' note_id=note.id %}" class="btn btn-outline-primary btn-sm">Читать</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center">
+            Заметок пока нет. Вы можете создать свою первую!
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
