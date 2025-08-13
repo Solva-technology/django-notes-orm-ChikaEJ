@@ -4,6 +4,8 @@ __pycache__/
 *$py.class
 .idea/
 # C extensions
+pyproject.toml
+
 *.so
 *.xml
 # Distribution / packaging
