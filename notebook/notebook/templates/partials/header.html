@@ -10,11 +10,11 @@
 <!--        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">-->
 <!--          <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">-->
 <!--        </form>-->
-
-<!--        <div class="text-end">-->
-<!--          <button type="button" class="btn btn-outline-light me-2">Login</button>-->
-<!--          <button type="button" class="btn btn-warning">Sign-up</button>-->
-<!--        </div>-->
+          {% if user != 'admin' %}
+            <div class="text-end">
+                <a class="btn btn-primary" href="{% url 'admin:index' %}">Панель администратора</a>
+            </div>
+          {% endif %}
       </div>
     </div>
   </header>
