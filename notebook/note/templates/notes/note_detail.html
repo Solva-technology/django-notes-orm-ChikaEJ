@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Заметка{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-body">
+            <h2 class="card-title text-primary">Заметка #{{ note.id }}</h2>
+
+            <p class="text-muted mb-2">
+                Автор: {{ note.author.name }} |
+                Дата: {{ note.created_at|date:"d.m.Y H:i" }} |
+                Статус: {{ note.status.name }}
+                {% if note.status.is_final %}
+                    ✅
+                {% else %}
+                    ⬜
+                {% endif %}
+            </p>
+
+            {% if note.categories.all %}
+                <p>
+                    Категории:
+                    {% for category in note.categories.all %}
+                        <span class="badge bg-info text-dark">
+                            {{ category.title }}
+                        </span>
+                    {% empty %}
+                        <span class="text-muted">Нет категорий</span>
+                    {% endfor %}
+                </p>
+            {% endif %}
+
+            <p class="card-text mt-3 fw-bold">{{ note.text }}</p>
+
+            <a href="{% url 'notes:all_notes' %}" class="btn btn-outline-secondary mt-4">← Назад ко всем заметкам</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
