@@ -48,9 +48,10 @@ class NoteAdmin(admin.ModelAdmin):
     search_fields = ('text', 'author__name')
     list_filter = ('status', 'categories')
     ordering = ('-created_at',)
+    filter_horizontal = ('categories',)
 
     def categories(self, obj):
-        return ", ".join([c.name for c in obj.category.all()])
+        return ", ".join([c.name for c in obj.categories.all()])
 
     categories.short_description = "Категории"
 

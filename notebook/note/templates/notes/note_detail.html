@@ -12,6 +12,11 @@
                 Автор: {{ note.author.name }} |
                 Дата: {{ note.created_at|date:"d.m.Y H:i" }} |
                 Статус: {{ note.status.name }}
+                {% if note.status.is_final %}
+                    ✅
+                {% else %}
+                    ⬜
+                {% endif %}
             </p>
 
             {% if note.categories.all %}

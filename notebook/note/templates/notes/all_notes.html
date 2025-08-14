@@ -16,15 +16,20 @@
                     <h5 class="card-title">{{ note.text|truncatechars:100 }}</h5>
                     <p class="card-text">
                         <small class="text-muted">
-                            Автор: {{ note.author.name }} |
+                            Автор: <span style="font-weight: bold">{{ note.author.name }}</span> |
                             Категории:
                             {% for category in note.categories.all %}
-                                {{ category.name }}{% if not forloop.last %}, {% endif %}
+                                <span style="font-weight: bold">{{ category.title }}</span>{% if not forloop.last %}, {% endif %}
                             {% empty %}
                                 нет категорий
                             {% endfor %} |
-                            Статус: {{ note.status.name }} |
-                            Дата: {{ note.created_at|date:"d.m.Y H:i" }}
+                            Статус: <span style="font-weight: bold">{{ note.status.name }}</span> |
+                            {% if note.status.is_final %}
+                                <span style="font-weight: bold">Завершен</span>
+                            {% else %}
+                                <span style="font-weight: bold">Не завершен</span>
+                            {% endif %} |
+                            Дата: <span style="font-weight: bold">{{ note.created_at|date:"d.m.Y H:i" }}</span>
                         </small>
                     </p>
                     <div class="text-end">
